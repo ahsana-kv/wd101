@@ -59,7 +59,15 @@ const saveduserform = (event) => {
     displayEntries(); // Update table
     document.getElementById("userentries").reset(); // Reset form
 };
+window.addEventListener('DOMContentLoaded', function() {
+    const dobInput = document.getElementById('dob');
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
+    dobInput.max = maxDate.toISOString().split('T')[0];
+    dobInput.min = minDate.toISOString().split('T')[0];
+    displayEntries();
+});
 // Event listeners
 document.getElementById("userentries").addEventListener("submit", saveduserform);
-window.addEventListener("DOMContentLoaded", displayEntries);
