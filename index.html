@@ -44,22 +44,6 @@
 </div>
 <!-- Bootstrap 5 JS (Optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    
-    <script>
-    // Set min and max date for DOB based on age 18 to 55
-    window.addEventListener('DOMContentLoaded', function() {
-        const dobInput = document.getElementById('dob');
-        const today = new Date();
-
-        const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-        const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
-
-        dobInput.max = maxDate.toISOString().split('T')[0];
-        dobInput.min = minDate.toISOString().split('T')[0];
-    });
-</script>
 <script src="index.js"></script>
 <!-- Table to Display Stored User Entries -->
 <div class="mt-5">
