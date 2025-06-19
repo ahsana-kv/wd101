@@ -1,0 +1,84 @@
+
+        body {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+        .form-container {
+            background: rgb(242, 247, 250);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            width: 100% !important;
+            width: 450px !important;
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.7rem;
+            color: #0b4281;
+        }
+        @media (max-width: 500px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+        .form-label {
+            font-weight: bold;
+            color: #0d1771;
+        }
+        .form-control {
+            background-color:#a1d8f2;
+
+        }
+        .btn-primary {
+           background-color:#327cab;
+        }
+    /* Table Styling to Match Form */
+.styled-table {
+    width: 100%;
+    max-width: 650px;
+    background: rgb(242, 247, 250);
+    margin: 20px auto 0 auto; /* centered under form */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgb(194, 240, 248);
+}
+
+.styled-table thead {
+    background-color: #327cab;
+    color:white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+    color: #0d1771;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #a1d8f2;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #327cab;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* center everything horizontally */
+    gap: 20px; /* space between form and table */
+}
+
