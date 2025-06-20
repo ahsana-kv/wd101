@@ -1,8 +1,6 @@
-// Load existing data from LocalStorage if any
-let userentries = JSON.parse(localStorage.getItem("userentries")) || [];
-
 // Function to display entries in the table
 const displayEntries = () => {
+    const userentries = JSON.parse(localStorage.getItem("userentries")) || []; // Always fresh read
     const tableBody = document.getElementById("entriesTableBody");
     tableBody.innerHTML = ""; // Clear existing rows
 
@@ -30,14 +28,14 @@ const saveduserform = (event) => {
     const dob = document.getElementById("dob").value;
     const acceptTerms = document.getElementById("acceptTerms").checked;
 
-    //  Email validation
+    // Email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         alert("Please enter a valid email address.");
-        return; // Stop form submission
+        return;
     }
 
-    //  Age validation (between 18 and 55)
+    // Age validation (between 18 and 55)
     const today = new Date();
     const dobDate = new Date(dob);
     let age = today.getFullYear() - dobDate.getFullYear();
@@ -48,17 +46,19 @@ const saveduserform = (event) => {
 
     if (age < 18 || age > 55) {
         alert("Age must be between 18 and 55.");
-        return; // Stop form submission
+        return;
     }
 
-    // If all valid, save entry
+    // Read existing entries freshly
+    let userentries = JSON.parse(localStorage.getItem("userentries")) || [];
     const entry = { name, email, password, dob, acceptTerms };
     userentries.push(entry);
     localStorage.setItem("userentries", JSON.stringify(userentries));
-    
+
     displayEntries(); // Update table
     document.getElementById("userentries").reset(); // Reset form
 };
+
 window.addEventListener('DOMContentLoaded', function() {
     const dobInput = document.getElementById('dob');
     const today = new Date();
@@ -67,7 +67,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
     dobInput.max = maxDate.toISOString().split('T')[0];
     dobInput.min = minDate.toISOString().split('T')[0];
-    displayEntries();
+
+    displayEntries(); // Display table when page loads
 });
-// Event listeners
+
+// Event listener
 document.getElementById("userentries").addEventListener("submit", saveduserform);
