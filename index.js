@@ -1,4 +1,3 @@
-localStorage.clear();
 // Load existing data from LocalStorage if any
 let userentries = JSON.parse(localStorage.getItem("userentries")) || [];
 
