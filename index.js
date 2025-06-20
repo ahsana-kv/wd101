@@ -1,6 +1,9 @@
+localStorage.clear();
+// Load existing data from LocalStorage if any
+let userentries = JSON.parse(localStorage.getItem("userentries")) || [];
+
 // Function to display entries in the table
 const displayEntries = () => {
-    const userentries = JSON.parse(localStorage.getItem("userentries")) || []; // Always fresh read
     const tableBody = document.getElementById("entriesTableBody");
     tableBody.innerHTML = ""; // Clear existing rows
 
@@ -12,7 +15,7 @@ const displayEntries = () => {
             <td>${entry.email}</td>
             <td>${entry.password}</td>
             <td>${entry.dob}</td>
-            <td>${entry.acceptTerms ? 'Yes' : 'No'}</td>
+            <td>${entry.acceptTerms }</td>
         `;
         tableBody.appendChild(row);
     });
@@ -28,14 +31,14 @@ const saveduserform = (event) => {
     const dob = document.getElementById("dob").value;
     const acceptTerms = document.getElementById("acceptTerms").checked;
 
-    // Email validation
+    //  Email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         alert("Please enter a valid email address.");
-        return;
+        return; // Stop form submission
     }
 
-    // Age validation (between 18 and 55)
+    //  Age validation (between 18 and 55)
     const today = new Date();
     const dobDate = new Date(dob);
     let age = today.getFullYear() - dobDate.getFullYear();
@@ -46,30 +49,18 @@ const saveduserform = (event) => {
 
     if (age < 18 || age > 55) {
         alert("Age must be between 18 and 55.");
-        return;
+        return; // Stop form submission
     }
 
-    // Read existing entries freshly
-    let userentries = JSON.parse(localStorage.getItem("userentries")) || [];
+    // If all valid, save entry
     const entry = { name, email, password, dob, acceptTerms };
     userentries.push(entry);
     localStorage.setItem("userentries", JSON.stringify(userentries));
-
+    
     displayEntries(); // Update table
     document.getElementById("userentries").reset(); // Reset form
 };
 
-window.addEventListener('DOMContentLoaded', function() {
-    const dobInput = document.getElementById('dob');
-    const today = new Date();
-    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-    const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
-
-    dobInput.max = maxDate.toISOString().split('T')[0];
-    dobInput.min = minDate.toISOString().split('T')[0];
-
-    displayEntries(); // Display table when page loads
-});
-
-// Event listener
+// Event listeners
 document.getElementById("userentries").addEventListener("submit", saveduserform);
+window.addEventListener("DOMContentLoaded", displayEntries);
